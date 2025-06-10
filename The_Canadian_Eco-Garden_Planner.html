@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Canadian Eco-Garden Planner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-purple: #9B59B6;
+            --dark-bg: #121212;
+            --dark-card: #1E1E1E;
+            --light-text: #EAEAEA;
+            --medium-text: #A0A0A0;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Lato', sans-serif;
+        }
+
+        h1, h2, h3, h4, .accordion-button {
+            font-family: 'Arvo', serif;
+        }
+
+        .main-container {
+            background: var(--dark-bg);
+            border-radius: 1rem;
+            padding: clamp(1rem, 5vw, 2.5rem);
+            border: 1px solid var(--border-color);
+        }
+
+        .display-4 {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .lead {
+            color: var(--medium-text);
+        }
+
+        .form-select {
+            background-color: var(--dark-card);
+            color: var(--light-text);
+            border-color: var(--border-color);
+        }
+        .form-select:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 0.25rem rgba(155, 89, 182, 0.25);
+        }
+
+        .accordion-item {
+            background-color: var(--dark-card);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            border-radius: 0.75rem !important;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background-color: transparent;
+            color: var(--light-text);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            color: var(--primary-purple);
+            background-color: rgba(155, 89, 182, 0.1);
+            box-shadow: inset 0 -1px 0 var(--border-color);
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(155, 89, 182, 0.25);
+        }
+        
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23A0A0A0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .accordion-body {
+            color: var(--medium-text);
+            padding: 1.5rem 2rem;
+        }
+        
+        .info-card h4 {
+            color: var(--primary-purple);
+            font-weight: 700;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-link {
+            display: inline-block;
+            margin-top: 1rem;
+            margin-right: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--primary-purple);
+            color: #fff;
+            border-radius: 9999px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-purple);
+        }
+        .action-link.secondary {
+             background-color: transparent;
+             color: var(--primary-purple);
+        }
+        .action-link:hover {
+            background-color: #fff;
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4">The Canadian Eco-Garden Planner</h1>
+            <p class="lead mt-3 col-md-10 mx-auto">An informative guide to creating a low-effort, critter-resistant garden, with recommendations tailored to your region of Canada.</p>
+        </header>
+
+        <div class="main-container">
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-8">
+                     <div class="text-center p-4 rounded-3" style="background-color: var(--dark-card);">
+                         <h2 class="h3 mb-3 text-white">How to Use This Guide</h2>
+                         <p class="text-start">This tool simplifies garden planning. First, select your climatic region from the dropdown menu below. The guide will then load a complete, four-part plan tailored to your area's conditions. Each part of the plan—Foundation, Border, Structure, and Hub—represents a key layer of a successful, low-maintenance garden. Click on any section to expand it and learn about the recommended plant, its benefits, and how to use it effectively.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 col-lg-6">
+                    <label for="regionSelector" class="form-label h5 text-center d-block">1. Select Your Climatic Region</label>
+                    <select class="form-select form-select-lg" id="regionSelector">
+                        <option selected value="">Please choose a region...</option>
+                        <option value="pacificCoast">Pacific Coast (Vancouver, Victoria)</option>
+                        <option value="bcInterior">BC Interior (Kelowna, Kamloops)</option>
+                        <option value="prairies">The Prairies (Calgary, Regina, Winnipeg)</option>
+                        <option value="southernOntario">Southern Ontario & Quebec (Toronto, Ottawa, Montreal)</option>
+                        <option value="maritimes">The Maritimes (Halifax, Moncton)</option>
+                        <option value="newfoundland">Newfoundland</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="text-center h3 mb-4" id="plan-title">2. Review Your Tailored Garden Plan</h2>
+                    <div id="plan-display">
+                        <div class="text-center p-5">
+                            <i class="bi bi-map" style="font-size: 4rem; color: var(--primary-purple);"></i>
+                            <p class="lead text-white-50 mt-3">Your plan will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="text-center mt-5 pt-4 border-top border-secondary">
+                <p class="small text-white-50">This is an educational guide. Always confirm plant hardiness, stock, and suitability for your specific site conditions with local gardening experts.</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    // --- DATABASE OF GARDEN PLANS ---
+    const plans = {
+        pacificCoast: {
+            title: "Pacific Coast Garden Plan (Zones 8-9)",
+            lawn: {
+                name: "Fine Fescue & Perennial Ryegrass Mix",
+                attributes: "Moss Resistant, Thrives in Damp Conditions, Durable.",
+                description: "The mild, wet winters of the coast require a turf that resists moss and thrives in damp conditions. A blend of fine fescues for shade tolerance and perennial ryegrass for durability creates a lush, green lawn that can handle the regional climate.",
+                strategy: "Overseed annually in the fall to keep the lawn thick and competitive against moss and weeds. Ensure good drainage and avoid overwatering in the summer to prevent fungal issues.",
+                resistance: "Good. While no grass is completely pest-proof, a healthy, dense lawn is the best defense against insects like the European Chafer beetle.",
+                galleryLink: "https://www.google.com/search?q=fine+fescue+perennial+ryegrass+lawn&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=fescue+ryegrass+seed+Vancouver+Victoria&tbs=lf:1,store:local"
+            },
+            groundcover: {
+                name: "Kinnikinnick (Bearberry)",
+                attributes: "Evergreen, Extremely Drought-Tolerant, Native.",
+                description: "A superb native groundcover with small, leathery evergreen leaves. It forms a low, dense mat that is extremely drought-tolerant once established. It produces small, pinkish-white bell-shaped flowers in spring, followed by bright red berries that persist into winter, providing food for birds.",
+                strategy: "Ideal for dry, sunny, or partially shaded areas with well-drained, acidic soil—perfect for slopes or rock gardens where other plants may struggle. It is slow to establish, so patience is key.",
+                resistance: "Excellent. Its tough, leathery leaves make it highly resistant to deer and rabbit browsing.",
+                galleryLink: "https://www.google.com/search?q=Kinnikinnick+bearberry+groundcover&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=Kinnikinnick+Arctostaphylos+uva-ursi+for+sale+Vancouver+BC&tbs=lf:1,store:local"
+            },
+            shrub: {
+                name: "Vine Maple",
+                attributes: "Spectacular Fall Colour, Thrives in Shade, Native.",
+                description: "A beautiful, multi-stemmed small tree or large shrub native to the Pacific Northwest. It has a graceful, airy structure with delicate, lobed leaves and thrives in the understory of larger trees. Its main feature is its spectacular fall colour, turning brilliant shades of orange, scarlet, and yellow.",
+                strategy: "Perfect for a location with dappled shade or morning sun. Use it as a focal point in a woodland-style garden. Requires little to no pruning to maintain its elegant form.",
+                resistance: "Good. Generally avoided by deer in favour of tastier treats like Cedar or Hostas.",
+                galleryLink: "https://www.google.com/search?q=Vine+Maple+Acer+circinatum+in+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=Vine+Maple+for+sale+Vancouver+Victoria&tbs=lf:1,store:local"
+            },
+            pollinators: {
+                name: "Top Trio: Salal, Red Flowering Currant & Oregon Grape",
+                attributes: "Early Spring Blooms, Supports Hummingbirds, Evergreen Foliage.",
+                description: "This trio provides year-round interest and critical food sources. **Red Flowering Currant** offers stunning pink blossoms in very early spring for returning hummingbirds. **Oregon Grape** has yellow flowers for bees, followed by berries. **Salal** is a tough evergreen with flowers and edible berries that provides shelter.",
+                strategy: "Use Red Flowering Currant as a spectacular spring focal point. Use Oregon Grape and Salal as tough, evergreen backbones of a garden bed to provide structure and winter interest.",
+                resistance: "Excellent. All three are tough, native plants that are highly resistant to local pests and browsing from deer.",
+                galleryLink: "https://www.google.com/search?q=salal+red+flowering+currant+oregon+grape+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=native+plants+for+sale+Vancouver+BC&tbs=lf:1,store:local"
+            }
+        },
+        bcInterior: {
+            title: "BC Interior Garden Plan (Zones 5-7)",
+            lawn: {
+                name: "Drought-Tolerant Fescue & Bluegrass Mix",
+                attributes: "Excellent Heat Tolerance, Water-Wise, Self-Repairing.",
+                description: "The hot, dry summers of the interior demand a turf that can withstand drought. A mix of Tall Fescue for its deep roots and heat tolerance, combined with a small amount of Kentucky Bluegrass for its ability to self-repair bare spots, is a resilient choice.",
+                strategy: "Water deeply but infrequently (once a week in the heat of summer) to encourage deep root growth. Allow the grass to grow slightly longer (3 inches) to shade the soil and conserve moisture.",
+                resistance: "Good. A healthy, properly watered lawn is the best defense against common pests like grubs.",
+                galleryLink: "https://www.google.com/search?q=tall+fescue+kentucky+bluegrass+lawn&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=drought+tolerant+grass+seed+Kelowna+Kamloops&tbs=lf:1,store:local"
+            },
+            groundcover: {
+                name: "Creeping Juniper",
+                attributes: "Extremely Low Maintenance, Evergreen Colour, Tolerates Heat & Cold.",
+                description: "This tough-as-nails evergreen groundcover is built for hot, dry, sunny slopes. It forms a low, spreading mat of blue-green or green, scale-like foliage. It requires virtually no water once established and provides excellent, year-round soil cover, preventing weed growth.",
+                strategy: "Perfect for covering large, difficult, sunny areas where you don't want to mow or water. Ensure it has full sun and well-drained soil to prevent root rot.",
+                resistance: "Excellent. Deer and rabbits will leave all juniper varieties completely alone.",
+                galleryLink: "https://www.google.com/search?q=creeping+juniper+ground+cover&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=creeping+juniper+for+sale+Kelowna+BC&tbs=lf:1,store:local"
+            },
+            shrub: {
+                name: "Saskatoon Berry",
+                attributes: "Edible Berries, Native & Adaptable, Four-Season Interest.",
+                description: "A highly adaptable, native shrub that is both ornamental and productive. It produces clouds of white flowers in spring, followed by delicious, blueberry-like berries in early summer. The fall colour is often a beautiful mix of yellow, orange, and red. It is extremely cold-hardy and drought-tolerant.",
+                strategy: "Plant in a sunny location as a standalone shrub or as an informal hedge. It is very low-maintenance, requiring only occasional pruning to remove old wood and encourage more fruit production.",
+                resistance: "Good. It is generally resistant to pests, but you will have to compete with birds for the delicious berries. Netting may be required if a large harvest is desired.",
+                galleryLink: "https://www.google.com/search?q=Saskatoon+Berry+Amelanchier+alnifolia+shrub+in+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=Saskatoon+Berry+shrub+for+sale+Kelowna+BC&tbs=lf:1,store:local"
+            },
+            pollinators: {
+                name: "Top Trio: Yarrow, Blue Flax & Gaillardia",
+                attributes: "Xeriscape Friendly, Long Bloom Season, Attracts Butterflies.",
+                description: "This is a drought-proof combination for a sun-drenched garden. **Yarrow (Achillea)** provides flat-topped flowers for beneficial insects. **Blue Flax** offers delicate, true-blue flowers over a long period. **Gaillardia (Blanket Flower)** is a powerhouse of red-and-yellow blooms that thrives on neglect.",
+                strategy: "Plant in a hot, sunny, well-drained spot. These plants thrive on neglect and do not need rich soil or much water once established. They create a beautiful, water-wise meadow look.",
+                resistance: "Excellent. All three have aromatic or fuzzy foliage that makes them very resistant to rabbits and deer.",
+                galleryLink: "https://www.google.com/search?q=garden+yarrow+blue+flax+gaillardia&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=drought+tolerant+perennials+for+sale+Kelowna+BC&tbs=lf:1,store:local"
+            }
+        },
+        prairies: {
+            title: "The Prairies Garden Plan (Zones 2-4)",
+            lawn: {
+                name: "Drought-Tolerant Fescue or Native Grass Mix",
+                attributes: "Extremely Cold Hardy, Water-Wise, Low-Input.",
+                description: "For the challenging prairie climate, a hardy fescue mix is a good low-maintenance option. For an even more eco-friendly choice, consider native grasses like **Buffalo Grass** or **Blue Grama**, which are exceptionally drought and cold tolerant, requiring very little input once established.",
+                strategy: "Native grasses are best seeded in late spring when soil has warmed. They are slow to establish but incredibly resilient. Fescues can be seeded in early spring or fall for quicker establishment.",
+                resistance: "Excellent. Native prairie grasses are naturally resistant to local pests and are not preferred by wildlife.",
+                galleryLink: "https://www.google.com/search?q=buffalo+grass+lawn&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=native+grass+seed+Calgary+Regina+Winnipeg&tbs=lf:1,store:local"
+            },
+            groundcover: {
+                name: "Creeping Juniper",
+                attributes: "Year-Round Colour, Thrives in Full Sun, Maintenance-Free.",
+                description: "The best choice for a tough, evergreen groundcover that can handle the prairie climate's extremes. It thrives in full sun, tolerates drought and cold, and provides year-round colour and texture while suppressing weeds. Requires no maintenance once established.",
+                strategy: "Excellent for covering sunny slopes, boulevards, or large areas where turf is not desired. Its prostrate form resists damage from wind and heavy snow load.",
+                resistance: "Excellent. Completely ignored by deer and rabbits.",
+                galleryLink: "https://www.google.com/search?q=creeping+juniper+ground+cover+prairies&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=creeping+juniper+for+sale+Calgary+AB&tbs=lf:1,store:local"
+            },
+            shrub: {
+                name: "Potentilla (Shrubby Cinquefoil)",
+                attributes: "Extremely Hardy, Blooms All Summer, Very Adaptable.",
+                description: "For reliable flowering in the toughest climates, Potentilla is unmatched. It's a tough, compact shrub that produces masses of cheerful yellow, white, or pink flowers all summer long, unfazed by cold, heat, or poor soil.",
+                strategy: "Use as a low, flowering hedge or as a filler in a sunny border. It requires almost no care beyond a light shear every few years to maintain a tidy shape. Thrives in full sun.",
+                resistance: "Excellent. Potentilla is not of interest to deer or rabbits.",
+                galleryLink: "https://www.google.com/search?q=Potentilla+shrub+in+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=Potentilla+for+sale+Winnipeg+MB&tbs=lf:1,store:local"
+            },
+            pollinators: {
+                name: "Top Trio: Prairie Crocus, Gaillardia & Asters",
+                attributes: "Native & Adapted, Provides Three-Season Bloom, Supports Local Bees.",
+                description: "A hardy trio for prairie pollinators. **Prairie Crocus** is one of the very first flowers to bloom in spring, providing crucial early food. **Gaillardia (Blanket Flower)** provides a riot of colour through the driest parts of summer. Native **Asters** bloom in the fall, providing a critical late-season food source.",
+                strategy: "Plant in a sunny, well-drained location. These native plants are adapted to the local climate and do not require supplemental watering or fertilizing once established.",
+                resistance: "Excellent. All are native or well-adapted plants with natural resistance to local wildlife.",
+                galleryLink: "https://www.google.com/search?q=prairie+crocus+gaillardia+aster+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=prairie+native+plants+for+sale+Calgary+Regina&tbs=lf:1,store:local"
+            }
+        },
+        southernOntario: {
+            title: "Southern Ontario & Quebec Garden Plan (Zones 4-7)",
+            lawn: {
+                name: "Ritchie Low Maintenance Eco Grass Seed",
+                attributes: "Drought-Tolerant, Reduced Mowing, Critter-Resistant.",
+                description: "The foundation of your landscape. This seed mix primarily contains **fescue**, a type of grass known for durability. Its deep root system makes it exceptionally drought-tolerant, staying greener longer in the hot, humid summers. As a slower-growing bunch grass, it requires significantly less mowing.",
+                strategy: "Best sown in early fall or spring. For new lawns, prepare bare soil. For existing lawns, mow short, rake vigorously to de-thatch, and overseed, ensuring good seed-to-soil contact by lightly tamping.",
+                resistance: "Excellent. The coarse texture of fescue is unpalatable to grazing animals like rabbits.",
+                galleryLink: "https://www.google.com/search?q=fine+fescue+lawn&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=Ritchie+Low+Maintenance+Eco+Grass+Seed+Ottawa+Toronto&tbs=lf:1,store:local"
+            },
+            groundcover: {
+                name: "Rozanne Cranesbill (Hardy Geranium)",
+                attributes: "Season-Long Flowers, Weed-Suppressing, Deer & Rabbit Proof.",
+                description: "A perfect 'living mulch.' 'Rozanne' forms a dense mound of deeply cut, green foliage that chokes out weeds. Its primary feature is the profusion of vibrant, violet-blue flowers that bloom relentlessly from June until the first frost, offering unparalleled, season-long colour.",
+                strategy: "Ideal for the front edge of garden beds or along walkways. Mass plantings create a continuous, weed-proof border. Space individual plants approximately 45-60 cm (18-24 inches) apart.",
+                resistance: "Excellent. Deer and rabbits intensely dislike the fragrant, slightly fuzzy leaves.",
+                galleryLink: "https://www.google.com/search?q=geranium+rozanne+as+garden+edging&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=Geranium+'Rozanne'+for+sale+Toronto+Ottawa&tbs=lf:1,store:local"
+            },
+            shrub: {
+                name: "Ginger Wine® Ninebark",
+                attributes: "Four-Season Interest, Native, Extremely Hardy.",
+                description: "A shrub with four-season interest. New spring foliage emerges a sunny orange, maturing to a deep burgundy. Clusters of soft white flowers appear in late spring, followed by attractive red seed heads. In winter, its exfoliating bark adds texture to the snowy landscape.",
+                strategy: "Use as an anchor point in your garden design, such as at the corner of your home. Allow approximately 2 meters (6 feet) of width for mature growth. Full sun produces the most vibrant foliage.",
+                resistance: "Excellent. The foliage and bark of all Ninebark varieties are unpalatable to deer and rabbits.",
+                galleryLink: "https://www.google.com/search?q=Ginger+Wine+Ninebark+in+garden+landscape&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q='Ginger+Wine'+Ninebark+for+sale+Toronto+Ottawa&tbs=lf:1,store:local"
+            },
+            pollinators: {
+                name: "Top Trio: Coneflower, Bee Balm & New England Aster",
+                attributes: "Supports Butterflies & Bees, Summer-to-Fall Blooms, Native Strength.",
+                description: "This community of plants works together to provide continuous food for pollinators. Their different heights and bloom times create a dynamic, meadow-like feel that changes throughout the seasons.",
+                strategy: "In a sunny garden bed, plant **Asters at the back** for fall colour, **Coneflowers in the middle** for summer structure, and **Bee Balm towards the front** to fill in gaps. This layered approach is both beautiful and functional.",
+                resistance: "Excellent. This trio is well-defended: Coneflower has prickly stems, Bee Balm's leaves are aromatic and minty, and Aster's foliage is coarse.",
+                galleryLink: "https://www.google.com/search?q=garden+with+echinacea+monarda+and+aster&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=native+perennials+for+sale+Toronto+Ottawa+Montreal&tbs=lf:1,store:local"
+            }
+        },
+        maritimes: {
+            title: "The Maritimes Garden Plan (Zones 5-6)",
+            lawn: {
+                name: "Salt-Tolerant Fescue & Ryegrass Mix",
+                attributes: "Tolerates Coastal Conditions, Resists Dampness, Hardy.",
+                description: "For coastal areas, a turf mix needs to handle salt spray and damp conditions. A blend of salt-tolerant tall fescues and durable perennial ryegrass creates a tough lawn that stays green in the moderate, moist climate.",
+                strategy: "Good soil aeration is key to prevent compaction in wet soils. Liming the soil is often necessary to counteract the naturally acidic conditions of the region.",
+                resistance: "Good. A healthy lawn is a resilient lawn that can better withstand common coastal issues.",
+                galleryLink: "https://www.google.com/search?q=coastal+lawn+fescue&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=salt+tolerant+grass+seed+Halifax+Moncton&tbs=lf:1,store:local"
+            },
+            groundcover: {
+                name: "Lowbush Blueberry",
+                attributes: "Edible Fruit, Thrives in Acidic Soil, Stunning Fall Colour.",
+                description: "More of a low, spreading shrub than a traditional groundcover, this native plant is perfect for the acidic soils of the Maritimes. It forms a dense thicket, produces bell-shaped flowers, delicious berries, and spectacular crimson fall colour.",
+                strategy: "Plant in a sunny, well-drained spot with acidic soil. It will spread by underground rhizomes to form a productive and beautiful patch. It is very low maintenance.",
+                resistance: "Good. You will need to protect the berries from birds if you want a harvest, but the plants themselves are seldom browsed by deer.",
+                galleryLink: "https://www.google.com/search?q=lowbush+blueberry+in+landscape&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=lowbush+blueberry+plants+for+sale+Nova+Scotia&tbs=lf:1,store:local"
+            },
+            shrub: {
+                name: "Bayberry",
+                attributes: "Fragrant Foliage, Salt Tolerant, Winter Interest.",
+                description: "A semi-evergreen shrub perfect for coastal conditions. Its leaves are leathery and aromatic when crushed. The most notable feature is the waxy, grey berries that cling to the stems of female plants through winter, providing a food source for birds. The berries were historically used to make candles.",
+                strategy: "Excellent for creating a low hedge or a naturalized border. It is very tolerant of salt spray and sandy soil. Plant both male and female plants if you want berries.",
+                resistance: "Excellent. The waxy, aromatic foliage is highly deer and rabbit resistant.",
+                galleryLink: "https://www.google.com/search?q=Bayberry+shrub+Myrica+pensylvanica&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=bayberry+shrub+for+sale+Halifax+NS&tbs=lf:1,store:local"
+            },
+            pollinators: {
+                name: "Top Trio: Sea Holly, Fireweed & Seaside Goldenrod",
+                attributes: "Tolerates Salt Spray, Thrives in Sandy Soil, Unique Textures.",
+                description: "A tough, coastal-themed pollinator garden. **Sea Holly** has unique, prickly blue flowers and foliage. **Fireweed** is a tall, iconic plant with spikes of pink flowers that colonizes disturbed areas. **Seaside Goldenrod** is a salt-tolerant version of the fall classic, perfect for pollinators.",
+                strategy: "This combination thrives in full sun and well-drained, even sandy, soil. They create a beautiful, wild, coastal meadow look that is incredibly resilient.",
+                resistance: "Excellent. Their tough, adapted nature makes them highly resistant to local pests and wildlife.",
+                galleryLink: "https://www.google.com/search?q=sea+holly+fireweed+goldenrod+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=maritime+native+plants+for+sale+halifax&tbs=lf:1,store:local"
+            }
+        },
+        newfoundland: {
+            title: "Newfoundland Garden Plan (Zones 4-5)",
+            lawn: {
+                name: "Hardy Fescue Mix",
+                attributes: "Tolerates Cool & Damp Conditions, Thrives in Acidic Soil, Low-Maintenance.",
+                description: "The cool, damp, and often foggy climate of Newfoundland requires a tough, adaptable turf. A 100% fine fescue mix is the best choice, as it tolerates lower light levels, acidic soil, and cool temperatures better than other grasses.",
+                strategy: "Good drainage is paramount. The lawn will benefit from annual core aeration and liming to combat soil compaction and acidity. Seeding is best done in late spring or early summer.",
+                resistance: "Good. Fescues are generally not preferred by wildlife, especially in a healthy, well-maintained state.",
+                galleryLink: "https://www.google.com/search?q=fine+fescue+lawn&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=hardy+grass+seed+for+sale+St+Johns+NL&tbs=lf:1,store:local"
+            },
+            groundcover: {
+                name: "Partridgeberry (Lingonberry)",
+                attributes: "Evergreen, Edible Berries, Thrives in Acidity.",
+                description: "An iconic, low-growing evergreen groundcover of the boreal forest. It forms a dense, glossy carpet of tiny leaves. It produces small pinkish flowers, followed by tart, edible red berries that are a local delicacy. It is exceptionally hardy and thrives in acidic, peaty soil.",
+                strategy: "This plant is perfect for creating a native groundcover under conifers or in a rock garden. It must have acidic soil to thrive. It is very slow-growing but forms a permanent, maintenance-free carpet.",
+                resistance: "Excellent. This tough native is completely ignored by browsing animals like moose and rabbits.",
+                galleryLink: "https://www.google.com/search?q=partridgeberry+lingonberry+ground+cover&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=partridgeberry+plants+for+sale+newfoundland&tbs=lf:1,store:local"
+            },
+            shrub: {
+                name: "Dwarf Black Spruce",
+                attributes: "Extremely Hardy, Year-Round Structure, Authentic to Region.",
+                description: "While the full-size tree defines the landscape, dwarf cultivars of the native Black Spruce make excellent structural shrubs. They offer year-round colour, a dense form that withstands wind and snow, and an authentic sense of place. Look for compact varieties at local nurseries.",
+                strategy: "Use as a tough, evergreen anchor point in a garden bed. It requires no pruning and thrives in the local climate and acidic soil. It provides excellent shelter for small birds in winter.",
+                resistance: "Excellent. No wildlife will bother a spruce tree.",
+                galleryLink: "https://www.google.com/search?q=dwarf+black+spruce+in+garden&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=dwarf+spruce+for+sale+St+Johns+NL&tbs=lf:1,store:local"
+            },
+            pollinators: {
+                name: "Top Trio: Labrador Tea, Twinflower & Blue Flag Iris",
+                attributes: "Adapted to Wet & Acidic Soil, Native, Unique Boreal Beauty.",
+                description: "A trio perfectly adapted to Newfoundland's bogs and acidic soil. **Labrador Tea** is a small evergreen shrub with unique white flowers and leathery leaves. **Twinflower** is a delicate, trailing vine with paired, pink, bell-shaped flowers. **Blue Flag Iris** provides a spectacular burst of purple in moist areas.",
+                strategy: "This combination is ideal for a wetter part of the garden or a bog garden. They require acidic soil and consistent moisture to thrive, reflecting the island's natural landscape.",
+                resistance: "Excellent. These native plants are part of the natural ecosystem and are not targeted by local wildlife.",
+                galleryLink: "https://www.google.com/search?q=labrador+tea+twinflower+blue+flag+iris&tbm=isch",
+                purchaseLink: "https://www.google.com/search?q=newfoundland+native+plants+for+sale&tbs=lf:1,store:local"
+            }
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const regionSelector = document.getElementById('regionSelector');
+        const planDisplay = document.getElementById('plan-display');
+        const planTitleElement = document.getElementById('plan-title');
+
+        regionSelector.addEventListener('change', (event) => {
+            const selectedRegion = event.target.value;
+            if (selectedRegion && plans[selectedRegion]) {
+                renderPlan(plans[selectedRegion]);
+                planTitleElement.textContent = `2. Review: ${plans[selectedRegion].title}`;
+            } else {
+                planTitleElement.textContent = `2. Review Your Tailored Garden Plan`;
+                planDisplay.innerHTML = `
+                <div class="text-center p-5">
+                    <i class="bi bi-map" style="font-size: 4rem; color: var(--primary-purple);"></i>
+                    <p class="lead text-white-50 mt-3">Your plan will appear here.</p>
+                </div>`;
+            }
+        });
+
+        function renderPlan(planData) {
+            planDisplay.innerHTML = `
+                <div class="accordion" id="dynamicGardenPlan">
+                    ${createAccordionItem('One', '<i class="bi bi-grass me-3"></i>Foundation: Resilient Turfgrass', planData.lawn, true)}
+                    ${createAccordionItem('Two', '<i class="bi bi-bounding-box-circles me-3"></i>Border: Weed-Suppressing Groundcover', planData.groundcover, false)}
+                    ${createAccordionItem('Three', '<i class="bi bi-tree me-3"></i>Structure: Four-Season Interest Shrub', planData.shrub, false)}
+                    ${createAccordionItem('Four', '<i class="bi bi-bug me-3"></i>Hub: A Community of Pollinator Perennials', planData.pollinators, false)}
+                </div>
+            `;
+            // Re-initialize collapses after rendering
+            const accordionElement = document.getElementById('dynamicGardenPlan');
+            const collapses = accordionElement.querySelectorAll('.accordion-collapse');
+            collapses.forEach(collapse => new bootstrap.Collapse(collapse, { toggle: false }));
+        }
+
+        function createAccordionItem(id, title, data, expanded) {
+            return `
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button ${expanded ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${id}" aria-expanded="${expanded}" aria-controls="collapse${id}">
+                            ${title}
+                        </button>
+                    </h2>
+                    <div id="collapse${id}" class="accordion-collapse collapse ${expanded ? 'show' : ''}" data-bs-parent="#dynamicGardenPlan">
+                        <div class="accordion-body info-card">
+                           <h3 class="h4">Recommendation: ${data.name}</h3>
+                           <h4>Key Attributes</h4>
+                           <p><strong>${data.attributes}</strong></p>
+                           <h4>Description</h4>
+                           <p>${data.description}</p>
+                           <h4>Planting Strategy</h4>
+                           <p>${data.strategy}</p>
+                           <h4>Wildlife Resistance</h4>
+                           <p>${data.resistance}</p>
+                           <a href="${data.galleryLink}" target="_blank" class="action-link">View Image Gallery</a>
+                           <a href="${data.purchaseLink}" target="_blank" class="action-link secondary">Find Locally</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    });
+    </script>
+</body>
+</html>
