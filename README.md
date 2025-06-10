@@ -4,9 +4,9 @@ Welcome to my collection of interactive and static infographics hosted on GitHub
 
 ## Accessing the Infographics
 
-To view the infographics, please click on the links below.
+To view the infographics, please click on the link below.
 
-* **[The Canadian Eco-Garden Planner]**: [https://shfqrkhn.github.io/InfoGFX/The_Canadian_Eco-Garden_Planner.html](https://shfqrkhn.github.io/InfoGFX/The_Canadian_Eco-Garden_Planner.html)
+* [**The Canadian Eco-Garden Planner**](https://shfqrkhn.github.io/InfoGFX/The_Canadian_Eco-Garden_Planner.html)
 
 ### How It Works
 
