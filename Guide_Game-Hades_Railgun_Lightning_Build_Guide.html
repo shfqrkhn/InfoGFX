@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deconstructing the Thunder God: Mastering the Eris Rail "Sea Storm" Build</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Custom Properties for Theming */
+        :root {
+            --background-colour: #1A1A2E; /* Deep Night Blue/Purple - evokes the Underworld */
+            --surface-colour: #2E2E4A; /* Slightly lighter shade - for cards/modules */
+            --primary-text-colour: #E0E0E0; /* Light Grey - high contrast on dark backgrounds */
+            --secondary-text-colour: #A0A0B0; /* Muted Grey - for less critical info */
+            --accent-primary: #FFD700; /* Gold - represents divine power, boons, mastery */
+            --accent-secondary: #00BFFF; /* Deep Sky Blue - represents lightning/water, Zeus/Poseidon */
+            --border-colour: #4A4A6B; /* Darker grey-blue for borders */
+            --focus-outline-colour: #FFD700; /* Gold for focus outlines */
+            --button-hover-bg: #4A4A6B; /* Darker hover state for buttons */
+            --button-active-bg: #5A5A7B; /* Even darker active state for buttons */
+            --shadow-colour: rgba(0, 0, 0, 0.5); /* General shadow color */
+            --header-font: 'Cinzel Decorative', serif; /* Font for headings */
+            --body-font: 'Open Sans', sans-serif; /* Font for body text */
+            --spacing-xs: 4px; /* Extra small spacing */
+            --spacing-sm: 8px; /* Small spacing */
+            --spacing-md: 12px; /* Medium spacing */
+            --spacing-lg: 16px; /* Large spacing */
+            --spacing-xl: 24px; /* Extra large spacing */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: var(--body-font);
+            background-color: var(--background-colour);
+            color: var(--primary-text-colour);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--header-font);
+            color: var(--accent-primary); /* Headings use primary accent color */
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(1.8rem, 5vw, 3rem); } /* Responsive font size for H1 */
+        h2 { font-size: clamp(1.5rem, 4.5vw, 2.5rem); color: var(--primary-text-colour); } /* H2 uses primary text color */
+        h3 { font-size: clamp(1.2rem, 4vw, 2rem); color: var(--accent-secondary); } /* H3 uses secondary accent color */
+        h4 { font-size: clamp(1rem, 3.5vw, 1.5rem); color: var(--primary-text-colour); } /* H4 uses primary text color */
+
+        p, ul, ol, li {
+            font-size: clamp(0.9rem, 2.8vw, 1.1rem); /* Responsive font size for body text */
+            color: var(--primary-text-colour);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        small {
+            font-size: clamp(0.8rem, 2.5vw, 1rem); /* Responsive font size for small text */
+            color: var(--secondary-text-colour);
+        }
+
+        a {
+            color: var(--accent-secondary); /* Links use secondary accent color */
+            text-decoration: none;
+            transition: color 0.3s ease; /* Smooth color transition on hover */
+        }
+
+        a:hover, a:focus {
+            color: var(--accent-primary); /* Links turn primary accent on hover/focus */
+            outline: none; /* Remove default outline, handled by :focus-visible */
+        }
+
+        /* Layout & Containers */
+        .container {
+            max-width: 900px; /* Max width for content */
+            margin: 0 auto; /* Center the container */
+            padding: var(--spacing-md);
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        .card {
+            background-color: var(--surface-colour);
+            border: 1px solid var(--border-colour);
+            border-radius: var(--spacing-sm); /* Rounded corners */
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: 0 4px 8px var(--shadow-colour); /* Subtle shadow */
+            position: relative;
+        }
+
+        /* Banner Section */
+        .banner {
+            background-color: var(--surface-colour);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            border-bottom: 2px solid var(--accent-primary); /* Gold border at the bottom */
+            box-shadow: 0 2px 10px var(--shadow-colour);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .banner h1 {
+            color: var(--accent-primary);
+            margin: 0;
+            font-size: clamp(2rem, 6vw, 4rem);
+            text-shadow: 2px 2px 4px var(--shadow-colour); /* Text shadow for banner title */
+        }
+
+        .banner p {
+            color: var(--secondary-text-colour);
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Buttons */
+        button {
+            background-color: var(--accent-secondary);
+            color: var(--primary-text-colour);
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--spacing-xs);
+            cursor: pointer;
+            font-family: var(--body-font);
+            font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transitions */
+            box-shadow: 0 2px 4px var(--shadow-colour);
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-1px); /* Slight lift on hover */
+        }
+
+        button:active {
+            background-color: var(--button-active-bg);
+            transform: translateY(0); /* Reset on click */
+        }
+
+        button:focus-visible {
+            outline: 2px solid var(--focus-outline-colour); /* Custom focus outline */
+            outline-offset: 2px;
+        }
+
+        /* Interactive Centerpiece (Accordion Grid) */
+        .centerpiece-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on small screens */
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .centerpiece-item {
+            background-color: var(--background-colour);
+            border: 1px solid var(--accent-secondary); /* Blue border */
+            border-radius: var(--spacing-sm);
+            padding: var(--spacing-md);
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 2px 6px var(--shadow-colour);
+        }
+
+        .centerpiece-item:hover {
+            background-color: var(--surface-colour);
+            border-color: var(--accent-primary); /* Gold border on hover */
+            transform: translateY(-2px);
+        }
+
+        .centerpiece-item.active {
+            background-color: var(--surface-colour);
+            border-color: var(--accent-primary); /* Gold border when active */
+            box-shadow: 0 4px 10px var(--accent-primary); /* More prominent shadow when active */
+            transform: translateY(-2px);
+        }
+
+        .centerpiece-item h4 {
+            margin: 0 0 var(--spacing-sm) 0;
+            color: var(--accent-primary); /* Item titles use primary accent */
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
+        }
+
+        .centerpiece-content {
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out; /* Smooth expansion/fade */
+            opacity: 0;
+            text-align: left;
+            padding-top: var(--spacing-sm);
+            color: var(--secondary-text-colour);
+            font-size: clamp(0.85rem, 2.7vw, 1rem);
+        }
+
+        .centerpiece-content.expanded {
+            max-height: 500px; /* Sufficiently large to accommodate content */
+            opacity: 1;
+            transition: max-height 0.7s ease-in, opacity 0.7s ease-in; /* Smooth expansion/fade */
+        }
+
+        /* Deep Dive Modules Section */
+        .module-section .card {
+            padding: var(--spacing-lg);
+        }
+
+        .module-section h3 {
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-colour); /* Separator line */
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .module-section ul {
+            list-style: disc; /* Standard disc bullets */
+            padding-left: var(--spacing-xl);
+        }
+
+        .module-section li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Table Styling for Mirror of Night and Hammers */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse; /* Collapse table borders */
+            margin-top: var(--spacing-md);
+            font-size: clamp(0.85rem, 2.7vw, 1rem);
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid var(--border-colour);
+            padding: var(--spacing-sm);
+            text-align: left;
+            vertical-align: top; /* Align content to top */
+            color: var(--primary-text-colour);
+        }
+
+        .data-table th {
+            background-color: var(--background-colour);
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.1); /* Subtle zebra striping */
+        }
+
+        /* MythBusting & FAQ Section */
+        .myth-faq-section .card {
+            padding: var(--spacing-lg);
+        }
+
+        .myth-faq-section h3 {
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-colour);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .myth-item, .faq-item {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .myth-item h4, .faq-item h4 {
+            color: var(--accent-secondary); /* Myth/FAQ titles use secondary accent */
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .myth-item p, .faq-item p {
+            margin-left: var(--spacing-sm);
+        }
+
+        /* Action Plan Section */
+        .action-plan-section .card {
+            padding: var(--spacing-lg);
+        }
+
+        .action-plan-section h3 {
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-colour);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .action-plan-item {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .action-plan-item h4 {
+            color: var(--accent-primary); /* Action plan step titles use primary accent */
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Sources Section */
+        .sources-section {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background-color: var(--surface-colour);
+            border-top: 1px solid var(--border-colour);
+        }
+
+        .sources-section h2 {
+            text-align: left;
+            color: var(--accent-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .sources-section ul {
+            list-style: disc;
+            padding-left: var(--spacing-xl);
+        }
+
+        .sources-section li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--secondary-text-colour);
+        }
+
+        /* Floating Navbar for Tools */
+        .bottom-navbar {
+            position: fixed; /* Fixed position at the bottom */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--background-colour);
+            border-top: 1px solid var(--border-colour);
+            box-shadow: 0 -2px 10px var(--shadow-colour); /* Shadow above the navbar */
+            z-index: 1000; /* Ensure it's on top */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--spacing-sm);
+            box-sizing: border-box;
+        }
+
+        .navbar-toggle {
+            background-color: var(--accent-primary);
+            color: var(--background-colour); /* Text color contrasting with gold */
+            border: none;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--spacing-xs);
+            cursor: pointer;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            margin-bottom: var(--spacing-sm);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-toggle:hover {
+            background-color: var(--accent-secondary); /* Blue on hover */
+        }
+
+        .navbar-content {
+            display: none; /* Hidden by default */
+            width: 100%;
+            padding-top: var(--spacing-sm);
+            border-top: 1px dashed var(--border-colour); /* Dashed separator */
+            text-align: center;
+        }
+
+        .navbar-content.expanded {
+            display: block; /* Show when expanded */
+        }
+
+        .tool-section {
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-sm);
+            background-color: var(--surface-colour);
+            border-radius: var(--spacing-xs);
+            border: 1px solid var(--border-colour);
+            box-shadow: 0 1px 3px var(--shadow-colour);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tool-section h4 {
+            color: var(--accent-secondary);
+            margin-top: 0;
+            margin-bottom: var(--spacing-sm);
+            text-align: left;
+        }
+
+        .tool-section label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: var(--secondary-text-colour);
+        }
+
+        .tool-section input[type="number"],
+        .tool-section textarea {
+            width: calc(100% - 16px); /* Account for padding */
+            padding: var(--spacing-xs);
+            margin-bottom: var(--spacing-sm);
+            border: 1px solid var(--border-colour);
+            border-radius: var(--spacing-xs);
+            background-color: var(--background-colour);
+            color: var(--primary-text-colour);
+            font-family: var(--body-font);
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            box-sizing: border-box;
+        }
+
+        .tool-section textarea {
+            min-height: 80px; /* Minimum height for notes area */
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        .tool-section button {
+            width: 100%;
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Checklist specific styles */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: var(--spacing-sm);
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-primary); /* Checkbox color */
+        }
+
+        .checklist-item label {
+            flex-grow: 1;
+            color: var(--primary-text-colour);
+            font-size: clamp(0.85rem, 2.7vw, 1rem);
+            margin-bottom: 0; /* Override default label margin */
+        }
+
+        .checklist-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through; /* Strikethrough when checked */
+            color: var(--secondary-text-colour); /* Faded color when checked */
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 600px) {
+            .container {
+                padding: var(--spacing-lg);
+            }
+
+            .card {
+                padding: var(--spacing-xl);
+            }
+
+            .centerpiece-grid {
+                grid-template-columns: 1fr 1fr; /* Two columns on tablets */
+            }
+        }
+
+        @media (min-width: 900px) {
+            .container {
+                padding: var(--spacing-xl);
+            }
+
+            .centerpiece-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr; /* Four columns on desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="banner">
+        <h1>The Sea Storm Imperative</h1>
+        <p>An exhaustive analysis and strategic guide to dominating the Underworld with the Adamant Rail's Aspect of Eris.</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Deconstructing the Thunder God: Mastering the Eris Rail "Sea Storm" Build</h2>
+            <p>This guide provides an exhaustive, evidence-based framework for consistently mastering the "Sea Storm" build for the Adamant Rail's Aspect of Eris in Hades, transforming players from beginners to high-Heat champions.</p>
+            <p>The overwhelming power of the Sea Storm build is not born from a single boon or weapon, but from a cascade of synergistic interactions. Each component amplifies the others, creating a feedback loop of damage and control that can trivialize the Underworld's greatest challenges.</p>
+        </section>
+
+        <section class="card centerpiece-section">
+            <h2>Core Synergy: The Arsenal of Strife</h2>
+            <p>Explore the foundational elements that combine to form the devastating "Sea Storm" build. Click on each component to understand its critical role and how it amplifies the overall damage potential.</p>
+            <div class="centerpiece-grid" role="tablist" aria-label="Core Build Components">
+                <div class="centerpiece-item" role="tab" id="tab-eris" aria-controls="panel-eris" aria-selected="false" tabindex="0">
+                    <h4>Aspect of Eris</h4>
+                    <div id="panel-eris" class="centerpiece-content" role="tabpanel" aria-labelledby="tab-eris" hidden>
+                        <p>The foundation: Absorbing your Special's blast grants +75% global damage for 8 seconds. This is a separate, final multiplier applied to ALL sources of damage, including boons like Zeus's lightning. Maintaining this buff is crucial.</p>
+                    </div>
+                </div>
+                <div class="centerpiece-item" role="tab" id="tab-zeus" aria-controls="panel-zeus" aria-selected="false" tabindex="0">
+                    <h4>Zeus's Lightning Strike (Attack)</h4>
+                    <div id="panel-zeus" class="centerpiece-content" role="tabpanel" aria-labelledby="tab-zeus" hidden>
+                        <p>Adds flat chain lightning damage to every bullet. The Rail's high fire rate combined with Zeus's flat additive damage creates a torrent of electrical death, forming the primary offensive engine. Each lightning bolt is multiplied by the Eris buff.</p>
+                    </div>
+                </div>
+                <div class="centerpiece-item" role="tab" id="tab-poseidon" aria-controls="panel-poseidon" aria-selected="false" tabindex="0">
+                    <h4>Poseidon's Tidal Dash (Dash)</h4>
+                    <div id="panel-poseidon" class="centerpiece-content" role="tabpanel" aria-labelledby="tab-poseidon" hidden>
+                        <p>Augments your dash with a wave that damages and knocks enemies away. This is an unparalleled defensive tool for creating space and interrupting attacks, and a required prerequisite for the Sea Storm Duo Boon.</p>
+                    </div>
+                </div>
+                <div class="centerpiece-item" role="tab" id="tab-seastorm" aria-controls="panel-seastorm" aria-selected="false" tabindex="0">
+                    <h4>Sea Storm (Duo Boon)</h4>
+                    <div id="panel-seastorm" class="centerpiece-content" role="tabpanel" aria-labelledby="tab-seastorm" hidden>
+                        <p>The capstone: Any effect that inflicts Poseidon's knock-away now also causes the target to be struck by a bolt of lightning from Zeus. Every dash becomes a screen-clearing offensive weapon, fully affected by the Eris multiplier.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card module-section">
+            <h2>Deep Dive Modules: Forging a Legend</h2>
+
+            <h3>Reflections of Power: Optimized Mirror of Night Configuration</h3>
+            <p>The Mirror of Night offers crucial permanent upgrades. For the Sea Storm Eris Rail, talent choices are specifically selected to increase boon probability, amplify damage, and provide survivability. This configuration represents the optimal setup:</p>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Talent Slot</th>
+                            <th>Optimal Choice</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Shadow Presence</td>
+                            <td>Constant repositioning and dashing through enemies create frequent opportunities for backstabs with Special/Dash. Offers more consistent damage than Fiery Presence.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Stygian Soul</td>
+                            <td><strong>Critical:</strong> Removes Zeus/Artemis Duo Boon (Lightning Rod) from the pool, significantly increasing the probability of being offered Sea Storm by manipulating RNG.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Dark Regeneration</td>
+                            <td>Offers more potential healing over a full run, especially when farming Darkness. More valuable for high-Heat runs where health is scarce.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Greater Reflex</td>
+                            <td><strong>Non-negotiable:</strong> An additional dash provides more mobility, invincibility frames, and critically, more triggers for Tidal Dash and Sea Storm, boosting both offense and defense.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Boiling Blood</td>
+                            <td>This build doesn't rely on Cast for primary damage. Boiling Blood provides a niche damage bonus against foes with a Cast shard lodged in them.</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Privileged Status</td>
+                            <td><strong>Essential:</strong> Easily apply Jolted (Zeus) and Rupture (Poseidon) for a constant +40% global damage bonus. Stacks multiplicatively with Aspect of Eris, a massive damage layer.</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Deep Pockets</td>
+                            <td>Starting with 100-150 Obols allows immediate purchase of key boons or Hammers from early shops, accelerating build assembly.</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Dark Foresight</td>
+                            <td>Increases frequency of "blue laurel" rewards (Boons, Hammers, Poms, Hearts), providing more opportunities to find Zeus and Poseidon and assemble the core build. More valuable than minor rarity increase.</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Gods' Legacy</td>
+                            <td>Provides a direct +10% chance (at max rank) for any offered boon to be a Duo or Legendary, crucial for finding Sea Storm consistently.</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Fated Persuasion</td>
+                            <td>Allows re-rolling boon selections, vital for "fishing" for Lightning Strike and Tidal Dash in early stages. Offers more control over the build itself.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>A Fury's Favor: Companion Selection and Justification</h3>
+            <p>Companions offer powerful, limited-use summons. For this build, the goal is to burst down high-priority targets or shorten dangerous boss phases.</p>
+            <ul>
+                <li><strong>The Meta Choice: Battie (from Megaera)</strong></li>
+                <li><strong>Justification:</strong> High, front-loaded damage (2500 at max rank), extremely fast activation, and a wide, linear area of effect. Less likely to miss moving targets. Primary use: instantly eliminate armor from mini-bosses or remove significant boss health. Can strike multiple champions simultaneously (e.g., Theseus and Asterius).</li>
+            </ul>
+
+            <h3>Navigating the Underworld: A Biome-by-Biome Execution Guide</h3>
+            <p>A disciplined approach to keepsake selection, boon acquisition, and Hammer upgrades is essential for consistently assembling the build.</p>
+            <h4>Tartarus: Securing the Foundation</h4>
+            <ul>
+                <li><strong>Keepsake:</strong> Begin with the <strong>Thunder Signet (Zeus)</strong> to guarantee a Zeus boon first.</li>
+                <li><strong>Goal:</strong> Find <strong>Lightning Strike</strong>. Use Fated Persuasion re-rolls. If Poseidon appears, prioritize <strong>Tidal Dash</strong>. Aim to leave Tartarus with both, but one is the minimum.</li>
+            </ul>
+            <h4>Asphodel: Chasing the Wave and Forcing the Duo</h4>
+            <ul>
+                <li><strong>Keepsake Switch:</strong> If missing Tidal Dash, switch to <strong>Conch Shell (Poseidon)</strong> to force his appearance. If both prerequisites are met, consider keeping Conch Shell for Poseidon boons (e.g., Razor Shoals) or switch to a utility keepsake.</li>
+                <li><strong>Ultimate Goal:</strong> Once you have one core boon from both Zeus and Poseidon, Sea Storm is added to their potential offerings. Prioritize rooms offering Zeus or Poseidon.</li>
+            </ul>
+            <h4>Elysium & The Temple of Styx: Solidifying Dominance</h4>
+            <ul>
+                <li><strong>Keepsake Switch:</strong> Highly recommended to switch to a defensive keepsake. <strong>Evergreen Acorn (Eurydice)</strong> negates damage from the first 5 hits during boss encounters. <strong>Lucky Tooth (Skelly)</strong> is a viable alternative for an extra life.</li>
+                <li><strong>Boon Priorities:</strong>
+                    <ul>
+                        <li><strong>Zeus:</strong> Static Discharge (Jolted status for Privileged Status), Double Strike (lightning strikes twice), Splitting Bolt (secondary bouncing lightning orb).</li>
+                        <li><strong>Poseidon:</strong> Razor Shoals or Typhoon's Fury (Rupture status, increased damage against slammed foes).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>The Anvil of Hephaestus: Daedalus Hammer Prioritization</h3>
+            <p>Hammers are significant power spikes. For Eris Rail, Special upgrades are generally more impactful, but two distinct strategic paths exist:</p>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Hammer Upgrade</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S+</td>
+                            <td>Rocket Bomb + Cluster Bomb</td>
+                            <td><strong>Single largest damage increase.</strong> Transforms Special into fast, direct-fire rockets (Rocket Bomb), then fires five in a spread (Cluster Bomb). Cataclysmic burst damage on single targets. Cornerstone for speedrunning and high-Heat builds.</td>
+                        </tr>
+                        <tr>
+                            <td>S</td>
+                            <td>Rocket Bomb</td>
+                            <td>Transformative. Changes Special to a responsive, high-damage tool. Massive increase in usability and damage, making it a top-tier priority even alone.</td>
+                        </tr>
+                        <tr>
+                            <td>S</td>
+                            <td>Cluster Bomb</td>
+                            <td>Fires five bombs instead of one, providing exceptional area coverage and immense burst damage when focused. Power amplified with Rocket Bomb, but S-tier alone.</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>Delta Chamber</td>
+                            <td>Premier Attack-modifying hammer. Converts Attack to a 3-round burst and removes manual reload. Allows constant movement/firing, preserving dash i-frames, and making the weapon feel fluid and safe. Best for consistency-focused approach.</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>Flurry Fire</td>
+                            <td>Increases fire rate/accuracy but roots Zagreus. High-risk, high-reward "turret" playstyle. Can produce high damage with Zeus, but mobility loss is a liability.</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>Ricochet Fire</td>
+                            <td>Bullets bounce to one additional foe. Decent for early-game crowd control but no benefit against single targets (bosses), limiting overall impact.</td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>Targeting System</td>
+                            <td>Special homes in on foes but reduces base damage. Damage penalty too severe, especially when maximizing Special's impact.</td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>Hazard Bomb</td>
+                            <td>Special deals enormous damage in larger radius but can damage Zagreus. Directly anti-synergistic with Aspect of Eris (requires standing in blast radius). Avoid at all costs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card myth-faq-section">
+            <h2>Advanced Underworld Theory: From Competence to Mastery</h2>
+
+            <h3>MythBusting: Common Misconceptions</h3>
+            <div class="myth-item">
+                <h4>Myth 1: Fated Persuasion and Fated Authority are interchangeable.</h4>
+                <p><strong>Debunked:</strong> These are mutually exclusive Mirror talents occupying the same slot. Fated Persuasion re-rolls boon selections, vital for finding prerequisites. Fated Authority re-rolls chamber rewards. Sound strategy dictates using Persuasion by default, only switching to Authority if struggling to find a specific god.</p>
+            </div>
+            <div class="myth-item">
+                <h4>Myth 2: Artemis is an "okay" god to take for this build.</h4>
+                <p><strong>Debunked:</strong> Taking Artemis boons is a high-risk "Artemis Trap." Adding her to the god pool introduces her Duo Boons, critically including Lightning Rod (Zeus/Artemis Duo). Lightning Rod competes for the same Duo Boon slot as Sea Storm, significantly decreasing the chance of being offered Sea Storm. Expert players actively avoid Artemis for consistency.</p>
+            </div>
+            <div class="myth-item">
+                <h4>Myth 3: Hazard Bomb is a good damage hammer for the Eris Rail.</h4>
+                <p><strong>Debunked:</strong> Hazard Bomb causes your Special to deal enormous damage in a larger radius but can also damage Zagreus. This is directly anti-synergistic with the Aspect of Eris, which requires you to stand inside the Special's blast radius to activate its damage buff. This hammer should be avoided at all costs.</p>
+            </div>
+
+            <h3>Advanced FAQ: Nuanced Inquiries</h3>
+            <div class="faq-item">
+                <h4>Q1: How does the Eris buff interact with other damage bonuses?</h4>
+                <p>The Aspect of Eris bonus is a "global" multiplier, meaning it's a separate, final multiplier applied to all sources of damage Zagreus produces, including secondary damage effects from boons. It multiplies already-buffed totals, leading to exponential scaling (e.g., (Base Damage × Boon Bonus) × Eris Multiplier).</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q2: Why is Stygian Soul critical for this build?</h4>
+                <p>Stygian Soul is a deliberate manipulation of the game's RNG. The Zeus/Artemis Duo Boon, Lightning Rod, shares prerequisites with Sea Storm and can "pollute" the Duo Boon pool. Lightning Rod is incompatible with Stygian Soul. By selecting Stygian Soul, you completely remove Lightning Rod as a possible offering, significantly increasing the mathematical probability of being offered Sea Storm.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q3: What makes Aphrodite a calculated choice for the third god slot?</h4>
+                <p>Aphrodite is a powerful choice for the third god slot. Her Heartbreak Flourish (Special) offers a large percentage-based damage bonus that synergizes well with the Rail's Special. More importantly, she applies the Weak status curse, providing excellent damage mitigation and easily enabling the +40% damage from Privileged Status. Adding her also opens up the Smoldering Air Duo Boon (Aphrodite/Zeus), a potent backup plan or addition.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Q4: How does this build handle high-Heat Pact conditions like Hard Labor or Forced Overtime?</h4>
+                <p>The Sea Storm Eris Rail mitigates many high-Heat conditions. Hard Labor's increased enemy damage is managed by the build's constant knockback from Tidal Dash and Sea Storm, keeping foes at a distance. Forced Overtime's faster enemies are managed by the build's high room-clearing speed and knockback, which helps control aggression.</p>
+            </div>
+        </section>
+
+        <section class="card action-plan-section">
+            <h2>Graduated Action Plan & Curated Resources</h2>
+
+            <h3>Action Plan for Mastery</h3>
+            <div class="action-plan-item">
+                <h4>Getting Started: Foundation of Thunder</h4>
+                <ul>
+                    <li>Understand the Aspect of Eris: Practice activating its damage buff consistently by dashing into your Special's blast.</li>
+                    <li>Prioritize Zeus and Poseidon: Focus on obtaining Lightning Strike (Attack) and Tidal Dash (Dash) early in your runs.</li>
+                    <li>Experiment with Keepsakes: Learn when to switch between Thunder Signet and Conch Shell to force god appearances.</li>
+                </ul>
+            </div>
+            <div class="action-plan-item">
+                <h4>Deepening Your Understanding: Strategic Refinements</h4>
+                <ul>
+                    <li>Optimize Mirror of Night: Configure your Mirror exactly as recommended, especially Stygian Soul for Duo Boon manipulation.</li>
+                    <li>Master God Pool Management: Be disciplined about avoiding non-synergistic gods (Ares, Demeter, Dionysus) and consider Aphrodite as your calculated third pick.</li>
+                    <li>Adapt Hammer Choices: Understand the two strategic paths for Hammers (consistency vs. burst damage) and make informed decisions based on your run's RNG.</li>
+                </ul>
+            </div>
+            <div class="action-plan-item">
+                <h4>Mastering the Skill: High-Heat Dominance</h4>
+                <ul>
+                    <li>Execute Biome Strategies: Follow the keepsake and boon prioritization guides for Tartarus, Asphodel, Elysium, and Styx.</li>
+                    <li>Refine Combat Flow: Seamlessly integrate dashes for defense and offense, leveraging Sea Storm's screen-clearing power.</li>
+                    <li>Tackle High Heat: Apply the recommended Pact of Punishment configuration, understanding how the build mitigates each condition.</li>
+                </ul>
+            </div>
+
+            <h3>Curated Resources for Deeper Exploration</h3>
+            <ul>
+                <li>Hades Wiki: <a href="https://www.google.com/search?q=Hades+Wiki" target="_blank">Search for detailed game mechanics and lore.</a></li>
+                <li>Hades Speedrunning Guides: <a href="https://www.google.com/search?q=Hades+speedrunning+guides" target="_blank">Explore advanced techniques and optimal strategies from top players.</a></li>
+                <li>Hades Community Forums: <a href="https://www.google.com/search?q=Hades+community+forums" target="_blank">Engage with other players, ask questions, and share your experiences.</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="sources-section">
+        <h2>Sources</h2>
+        <ul>
+            <li>CBR: <a href="https://www.google.com/search?q=Best+Build+for+The+Adamant+Rail+in+Hades+-+CBR" target="_blank">Best Build for The Adamant Rail in Hades</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=How+do+you+build+Adamant+Rail%3F+r%2FHadesTheGame" target="_blank">How do you build Adamant Rail?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Quick+What+is+best+build+for+Eris+or+Hestia+aspect+of+Railgun%3F+r%2FHadesTheGame" target="_blank">Quick What is best build for Eri or Hestia aspect of Railgun?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Attack+builds+with+eris+rail+r%2FHadesTheGame" target="_blank">Attack builds with eris rail</a></li>
+            <li>Speedrun.com: <a href="https://www.google.com/search?q=Hades+Guides+Speedrun.com" target="_blank">Hades - Guides - Speedrun.com</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Build+advice+for+clearing+Heat+32%3F+-+Hades+The+Game+-+Reddit" target="_blank">Build advice for clearing Heat 32?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=rail+build+advice%3F+r%2FHadesTheGame" target="_blank">rail build advice?</a></li>
+            <li>Steam Community: <a href="https://www.google.com/search?q=Which+Gods%27+Powerups+do+you+like+the+least%3F+Hades+General+Discussions" target="_blank">Which Gods' Powerups do you like the least? :: Hades General Discussions</a></li>
+            <li>Screen Rant: <a href="https://www.google.com/search?q=Hades%3A+Duo+Boons+(How+to+Find+Them+and+What+They+Do)+-+Screen+Rant" target="_blank">Hades: Duo Boons (How to Find Them and What They Do)</a></li>
+            <li>Coda: <a href="https://www.google.com/search?q=Full+Boon+Sheet+Hades+Boon+Hunting+-+Coda" target="_blank">Full Boon Sheet Hades Boon Hunting</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=How+can+I+get+seastorm+duo%3F+r%2FHadesTheGame" target="_blank">How can I get seastorm duo?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Who+is+the+best+companion+to+use%3F+r%2FHadesTheGame" target="_blank">Who is the best companion to use?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Best+Companion+to+Level+First%3F+r%2FHadesTheGame" target="_blank">Best Companion to Level First?</a></li>
+            <li>Game Rant: <a href="https://www.google.com/search?q=Hades%3A+All+Companions+%26+How+To+Get+Them+-+Game+Rant" target="_blank">Hades: All Companions & How To Get Them</a></li>
+            <li>Rock Paper Shotgun: <a href="https://www.google.com/search?q=Hades+guide%3A+tips+and+strategies+on+how+to+beat+the+game+-+Rock+Paper+Shotgun" target="_blank">Hades guide: tips and strategies on how to beat the game</a></li>
+            <li>Steam Community: <a href="https://www.google.com/search?q=How+do+you+prioritize+which+next+room%3F+Hades+General+Discussions+-+Steam+Community" target="_blank">How do you prioritize which next room? :: Hades General Discussions</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Hammers+for+the+Rail+-+Chthonic+Conversation+%2354%3A+r%2FHadesTheGame" target="_blank">Hammers for the Rail - Chthonic Conversation #54</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=God+keepsakes+and+god+pool%3A+r%2FHadesTheGame" target="_blank">God keepsakes and god pool</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=God+pool+mechanic%3A+r%2FHadesTheGame" target="_blank">God pool mechanic</a></li>
+            <li>Steam Community: <a href="https://www.google.com/search?q=Guide+to+Monotheism+-+Hades+-+Steam+Community" target="_blank">Guide to Monotheism - Hades - Steam Community</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Which+god+do+you+avoid+most%3F+r%2FHadesTheGame" target="_blank">Which god do you avoid most?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Worst+god+to+get+when+making+a+build%3F+(Hades+1+only%2C+please)%3A+r%2FHadesTheGame" target="_blank">Worst god to get when making a build? (Hades 1 only, please)</a></li>
+            <li>Steam Community: <a href="https://www.google.com/search?q=The+Strongest+Duo+Boons+How+To+Get+Them+Steam+Community" target="_blank">The Strongest Duo Boons How To Get Them</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Rail+builds%3A+r%2FHadesTheGame" target="_blank">Rail builds</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Best+boons+to+use+with+the+adamant+rail+and+aspect+of+Eris%3F%3A+r%2FHadesTheGame" target="_blank">Best boons to use with the adamant rail and aspect of Eris?</a></li>
+            <li>Reddit (r/HadesTheGame): <a href="https://www.google.com/search?q=Pact+of+Punishment+guide+for+beginners.%3A+r%2FHadesTheGame" target="_blank">Pact of Punishment guide for beginners.</a></li>
+        </ul>
+    </footer>
+
+    <nav class="bottom-navbar">
+        <button class="navbar-toggle" aria-expanded="false" aria-controls="tools-content">Toggle Tools</button>
+        <div id="tools-content" class="navbar-content">
+            <div class="tool-section">
+                <h4>Build Progress Checklist</h4>
+                <div id="build-checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-eris">
+                        <label for="check-eris">Aspect of Eris Active</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-zeus-attack">
+                        <label for="check-zeus-attack">Zeus's Lightning Strike (Attack)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-poseidon-dash">
+                        <label for="check-poseidon-dash">Poseidon's Tidal Dash (Dash)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-sea-storm">
+                        <label for="check-sea-storm">Sea Storm Duo Boon Acquired</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-privileged-status">
+                        <label for="check-privileged-status">Privileged Status (Mirror)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check-stygian-soul">
+                        <label for="check-stygian-soul">Stygian Soul (Mirror)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h4>Heat Calculator</h4>
+                <label for="hard-labor-heat">Hard Labor (0-5 Heat):</label>
+                <input type="number" id="hard-labor-heat" min="0" max="5" value="0" aria-label="Hard Labor Heat">
+                <label for="lasting-consequences-heat">Lasting Consequences (0-4 Heat):</label>
+                <input type="number" id="lasting-consequences-heat" min="0" max="4" value="0" aria-label="Lasting Consequences Heat">
+                <label for="convenience-fee-heat">Convenience Fee (0-2 Heat):</label>
+                <input type="number" id="convenience-fee-heat" min="0" max="2" value="0" aria-label="Convenience Fee Heat">
+                <label for="extreme-measures-heat">Extreme Measures (0-4 Heat):</label>
+                <input type="number" id="extreme-measures-heat" min="0" max="4" value="0" aria-label="Extreme Measures Heat">
+                <label for="forced-overtime-heat">Forced Overtime (0-2 Heat):</label>
+                <input type="number" id="forced-overtime-heat" min="0" max="2" value="0" aria-label="Forced Overtime Heat">
+                <label for="tight-deadline-heat">Tight Deadline (0-2 Heat):</label>
+                <input type="number" id="tight-deadline-heat" min="0" max="2" value="0" aria-label="Tight Deadline Heat">
+                <label for="middle-management-heat">Middle Management (0-1 Heat):</label>
+                <input type="number" id="middle-management-heat" min="0" max="1" value="0" aria-label="Middle Management Heat">
+                <label for="damage-control-heat">Damage Control (0-2 Heat):</label>
+                <input type="number" id="damage-control-heat" min="0" max="2" value="0" aria-label="Damage Control Heat">
+                <p>Total Heat: <span id="total-heat">0</span></p>
+            </div>
+
+            <div class="tool-section">
+                <h4>Notes</h4>
+                <textarea id="notes-area" placeholder="Jot down your strategies or observations here..." aria-label="Notes area"></textarea>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Global ARIA live region for announcements
+        let ariaLiveRegion;
+
+        document.addEventListener('DOMContentLoaded', mainInit);
+
+        /**
+         * The main initialization function, called when the DOM is fully loaded.
+         * Sets up all interactive components.
+         */
+        function mainInit() {
+            // Create ARIA live region once
+            ariaLiveRegion = document.createElement('div');
+            ariaLiveRegion.setAttribute('aria-live', 'polite');
+            ariaLiveRegion.style.cssText = 'position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;';
+            document.body.appendChild(ariaLiveRegion);
+
+            setupCenterpieceAccordion();
+            setupNavbarToggle();
+            setupHeatCalculator();
+            // No Chart.js setup needed as charts are not applicable for this topic.
+        }
+
+        /**
+         * Sets up the interactive centerpiece with accordion behavior.
+         * When an item is clicked, its content expands and others collapse.
+         * Also handles keyboard navigation (Enter/Space to activate, arrow keys for navigation).
+         */
+        function setupCenterpieceAccordion() {
+            const items = document.querySelectorAll('.centerpiece-item');
+
+            items.forEach(item => {
+                item.addEventListener('click', () => toggleCenterpieceItem(item));
+                item.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault(); // Prevent default scroll for spacebar
+                        toggleCenterpieceItem(item);
+                    } else if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' ||
+                               event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        navigateCenterpieceItems(item, event.key);
+                    }
+                });
+            });
+
+            /**
+             * Toggles the expansion state of a centerpiece item.
+             * Ensures only one item is expanded at a time (accordion behavior).
+             * Updates ARIA attributes and announces state changes via live region.
+             * @param {HTMLElement} currentItem The item to toggle.
+             */
+            function toggleCenterpieceItem(currentItem) {
+                const content = currentItem.querySelector('.centerpiece-content');
+                const isExpanded = currentItem.classList.contains('active');
+
+                // Collapse all other items
+                items.forEach(item => {
+                    if (item !== currentItem && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                        item.setAttribute('aria-selected', 'false');
+                        item.querySelector('.centerpiece-content').classList.remove('expanded');
+                        item.querySelector('.centerpiece-content').setAttribute('hidden', 'true');
+                    }
+                });
+
+                // Toggle current item
+                if (isExpanded) {
+                    currentItem.classList.remove('active');
+                    currentItem.setAttribute('aria-selected', 'false');
+                    content.classList.remove('expanded');
+                    content.setAttribute('hidden', 'true');
+                    ariaLiveRegion.textContent = `${currentItem.querySelector('h4').textContent} collapsed.`;
+                } else {
+                    currentItem.classList.add('active');
+                    currentItem.setAttribute('aria-selected', 'true');
+                    content.classList.add('expanded');
+                    content.removeAttribute('hidden');
+                    ariaLiveRegion.textContent = `${currentItem.querySelector('h4').textContent} expanded.`;
+                }
+            }
+
+            /**
+             * Navigates between centerpiece items using arrow keys.
+             * Handles both single-column (mobile) and grid (desktop) layouts.
+             * @param {HTMLElement} currentItem The currently focused item.
+             * @param {string} key The arrow key pressed ('ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown').
+             */
+            function navigateCenterpieceItems(currentItem, key) {
+                const currentIdx = Array.from(items).indexOf(currentItem);
+                let nextIdx = -1;
+                const numItems = items.length;
+                // Get computed style for grid columns to determine layout dynamically
+                const computedStyle = window.getComputedStyle(currentItem.parentElement);
+                const gridTemplateColumns = computedStyle.getPropertyValue('grid-template-columns');
+                const numCols = gridTemplateColumns.split(' ').length; // Count columns based on CSS grid
+
+                if (numCols === 1) { // Single column layout
+                    if (key === 'ArrowDown') {
+                        nextIdx = (currentIdx + 1) % numItems;
+                    } else if (key === 'ArrowUp') {
+                        nextIdx = (currentIdx - 1 + numItems) % numItems;
+                    }
+                } else { // Grid layout
+                    const currentRow = Math.floor(currentIdx / numCols);
+                    const currentCol = currentIdx % numCols;
+
+                    if (key === 'ArrowRight') {
+                        nextIdx = (currentIdx + 1) % numItems;
+                    } else if (key === 'ArrowLeft') {
+                        nextIdx = (currentIdx - 1 + numItems) % numItems;
+                    } else if (key === 'ArrowDown') {
+                        nextIdx = (currentRow + 1) * numCols + currentCol;
+                        if (nextIdx >= numItems) { // Wrap to first item in same column of first row if applicable
+                            nextIdx = currentCol;
+                            if (nextIdx >= numItems) nextIdx = 0; // Fallback to first item if only one row
+                        }
+                    } else if (key === 'ArrowUp') {
+                        nextIdx = (currentRow - 1) * numCols + currentCol;
+                        if (nextIdx < 0) { // Wrap to last item in same column of last row if applicable
+                            nextIdx = (Math.floor((numItems - 1) / numCols)) * numCols + currentCol;
+                            if (nextIdx >= numItems) nextIdx = numItems - 1; // Fallback to last item if only one row
+                        }
+                    }
+                }
+
+                if (nextIdx !== -1 && items[nextIdx]) {
+                    items[nextIdx].focus(); // Move focus to the next item
+                }
+            }
+        }
+
+        /**
+         * Sets up the toggle functionality for the bottom navbar.
+         * Expands and collapses the tools section.
+         * Updates ARIA attributes and announces state changes via live region.
+         */
+        function setupNavbarToggle() {
+            const toggleButton = document.querySelector('.navbar-toggle');
+            const navbarContent = document.getElementById('tools-content');
+
+            toggleButton.addEventListener('click', () => {
+                const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+                toggleButton.setAttribute('aria-expanded', !isExpanded);
+                navbarContent.classList.toggle('expanded');
+                if (!isExpanded) {
+                    ariaLiveRegion.textContent = 'Tools expanded.';
+                } else {
+                    ariaLiveRegion.textContent = 'Tools collapsed.';
+                }
+            });
+        }
+
+        /**
+         * Sets up the Heat Calculator functionality.
+         * Calculates total Heat based on user input for Pact of Punishment values.
+         * The specific heat values for each level are hardcoded based on the provided document.
+         */
+        function setupHeatCalculator() {
+            const heatInputs = document.querySelectorAll('.tool-section input[type="number"]');
+            const totalHeatSpan = document.getElementById('total-heat');
+
+            // Specific heat values for each level of Pact of Punishment conditions, as per the document.
+            // Index corresponds to the level (e.g., specificPactValues.hardLabor[1] is Heat for level 1)
+            const specificPactValues = {
+                'hard-labor-heat': [0, 1, 2, 3, 4, 5], // 1 heat per level, max 5
+                'lasting-consequences-heat': [0, 1, 2, 3, 4], // 1 heat per level, max 4
+                'convenience-fee-heat': [0, 1, 2], // 1 heat per level, max 2
+                'extreme-measures-heat': [0, 1, 3, 6, 10], // Specific values: 0, 1, 3, 6, 10 heat, max 4
+                'forced-overtime-heat': [0, 3, 6], // Specific values: 0, 3, 6 heat, max 2
+                'tight-deadline-heat': [0, 2, 3], // Specific values: 0, 2, 3 heat, max 2
+                'middle-management-heat': [0, 2], // Specific values: 0, 2 heat, max 1
+                'damage-control-heat': [0, 1, 2] // Specific values: 0, 1, 2 heat, max 2
+            };
+
+            /**
+             * Calculates and updates the total Heat displayed.
+             * Ensures input values are within their defined min/max ranges.
+             */
+            function calculateTotalHeat() {
+                let totalHeat = 0;
+                heatInputs.forEach(input => {
+                    const id = input.id;
+                    let level = parseInt(input.value, 10);
+
+                    // Clamp input value to min/max defined in HTML attributes
+                    const min = parseInt(input.min, 10);
+                    const max = parseInt(input.max, 10);
+                    if (isNaN(level) || level < min) {
+                        level = min;
+                        input.value = min; // Correct the input value visually
+                    } else if (level > max) {
+                        level = max;
+                        input.value = max; // Correct the input value visually
+                    }
+
+                    // Add heat based on the specific pact values array
+                    if (specificPactValues[id] && level >= 0 && level < specificPactValues[id].length) {
+                        totalHeat += specificPactValues[id][level];
+                    } else {
+                        // This case should ideally not be hit if min/max are correctly set and clamped
+                        console.error(`Invalid level or missing pact data for ${id}: ${level}`);
+                    }
+                });
+                totalHeatSpan.textContent = totalHeat;
+            }
+
+            // Attach event listeners to all heat input fields
+            heatInputs.forEach(input => {
+                input.addEventListener('input', calculateTotalHeat);
+                // Trigger initial calculation to ensure correct display on load
+                // and to clamp any pre-filled invalid values.
+                calculateTotalHeat();
+            });
+
+            // Initial calculation to set the correct total heat on page load
+            calculateTotalHeat();
+        }
+    </script>
+</body>
+</html>
