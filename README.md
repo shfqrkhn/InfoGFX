@@ -1,17 +1,23 @@
-# InfoGFX - Infographics Showcase
+-----
 
-Welcome to my collection of interactive and static infographics hosted on GitHub Pages.
+# shfqrkhn's Guides, Info, and More\!
 
-## Accessing the Infographics
+Welcome to my GitHub repository, a collection of guides, information, and other files.
 
-To view the infographics, please click on the link below.
+## Repository Contents
 
-* [**The Canadian Eco-Garden Planner**](https://shfqrkhn.github.io/InfoGFX/The_Canadian_Eco-Garden_Planner.html)
+This repository currently hosts the following files, which you can access directly via their **GitHub Pages** links:
 
-### How It Works
+  * **Guides:**
+      * **Hades Railgun Lightning Build Guide:** [https://shfqrkhn.github.io/InfoGFX/Guide\_Game-Hades\_Railgun\_Lightning\_Build\_Guide.html](https://www.google.com/search?q=https://shfqrkhn.github.io/InfoGFX/Guide_Game-Hades_Railgun_Lightning_Build_Guide.html)
+      * **The Canadian Eco-Garden Planner:** [https://shfqrkhn.github.io/InfoGFX/Guide\_Gardening-The\_Canadian\_Eco-Garden\_Planner.html](https://www.google.com/search?q=https://shfqrkhn.github.io/InfoGFX/Guide_Gardening-The_Canadian_Eco-Garden_Planner.html)
+  * **Information:**
+      * **YouTube Subscriptions:** [https://shfqrkhn.github.io/InfoGFX/Info-YouTube\_Subscriptions.html](https://www.google.com/search?q=https://shfqrkhn.github.io/InfoGFX/Info-YouTube_Subscriptions.html)
+  * **Recipes:**
+      * **The Apex Egg Salad:** [https://shfqrkhn.github.io/InfoGFX/Recipe-The\_Apex\_Egg\_Salad.html](https://www.google.com/search?q=https://shfqrkhn.github.io/InfoGFX/Recipe-The_Apex_Egg_Salad.html)
 
-This project uses [GitHub Pages](https://pages.github.com/) to host static HTML files. The link above will direct you to the rendered HTML page where you can view and interact with the infographic.
+-----
 
-### About This Repository
+## About This Repository
 
-This repository contains the source code (HTML, CSS, JavaScript) for the infographics.
+This repository serves as a personal collection of various useful files and guides. It leverages **GitHub Pages** to host static HTML content, making it easily accessible for anyone to view directly in their web browser.
