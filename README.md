@@ -1,6 +1,6 @@
 -----
 
-# shfqrkhn's Guides, Info, and More\!
+# Guides, Info, and More\!
 
 Welcome to my GitHub repository, a collection of guides, information, and other files.
 
